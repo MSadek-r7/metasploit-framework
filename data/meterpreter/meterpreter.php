@@ -453,7 +453,10 @@ function core_machine_id($req, &$pkt) {
     # it's lowercase as this is what the other meterpreters use.
     $output = strtolower(shell_exec("vol %SYSTEMDRIVE%"));
     $serial = preg_replace('/.*serial number is ([a-z0-9]{4}-[a-z0-9]{4}).*/s', '$1', $output);
-  } else {
+  } elseif (shell_exec(uname) == "Darwin") {
+        $serial = echo shell_exec('((system_profiler SPStorageDataType | grep "PV UUID: ") | tr -d "PV UUID: " | tr -d "-")')
+  }
+  else{
     $serial = get_hdd_label();
   }
 
