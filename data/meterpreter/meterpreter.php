@@ -454,7 +454,7 @@ function core_machine_id($req, &$pkt) {
     $output = strtolower(shell_exec("vol %SYSTEMDRIVE%"));
     $serial = preg_replace('/.*serial number is ([a-z0-9]{4}-[a-z0-9]{4}).*/s', '$1', $output);
   } elseif (shell_exec(uname) == "Darwin") {
-        $serial = echo shell_exec('((system_profiler SPStorageDataType | grep "PV UUID: ") | tr -d "PV UUID: " | tr -d "-")')
+        $serial = echo shell_exec('((system_profiler SPStorageDataType | grep "PV UUID: ") | tr -d "PV UUID: " | tr -d "-")');
   }
   else{
     $serial = get_hdd_label();
